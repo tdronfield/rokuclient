@@ -8,9 +8,9 @@ const port = process.env.PORT || 5000;
 
 // Tell HBS where our views content lives,
 // Like how we tell routes where to find index
-app.set("views", path.join(__dirname, "public"));
+app.set("views", path.join(__dirname, "views"));
 // Use the hbs engine to render everything in views
-app.set("views", "hbs");
+app.set("view engine", "hbs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
