@@ -20,4 +20,15 @@ router.get("/portfolio", (req, res) => {
     res.render("artwork", { anothermessage: "You're on the portfolio page"});
 })
 
+// other routes you might use
+// this function means: 
+// if no routes are matched, this will trigger
+router.use((req, res) => {
+    res.status(404);
+    // res.send("Page doesn't exist");
+    res.render("error", {
+        layout: "errorLayout.hbs", errormessage: `You Lost Your Way! "${req.url}" doesn't exist.`
+    });
+})
+
 module.exports = router;
