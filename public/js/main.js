@@ -1,18 +1,20 @@
 import LoginComponent from "./components/TheLoginComponent.js";
 import AllUsers from "./components/TheAllUsersComponent.js";
+import HomeComponent from "./components/TheHomeComponent.js";
 
 const router = new VueRouter({
     routes: [
         { path: "/", name: "root", component: LoginComponent },
-        { path: "/users", name: "users", component: AllUsers }
-
+        { path: "/users", name: "users", component: AllUsers },
+        { path: "/home", name: "home", component: HomeComponent, props: true}
     ]
 });
 
 (() => {
     const vm = new Vue({
         data: {
-            allMovies: []
+            authenticated: false,
+            isAdmin: false
         },
 
         created: function(){
@@ -29,7 +31,14 @@ const router = new VueRouter({
         },
 
         methods: {
-
+            logout(){
+                // remove the cached user from localstorage if it exists
+                if (localStorage.getItem('cacheduser')){
+                    localStorage.removeItem('cacheduser');
+                }
+                // redirect the user (push) back to the root (home/index) route
+                this.$router.push({ name: "root" });
+            }
         },
 
         components: {
